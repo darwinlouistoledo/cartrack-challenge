@@ -1,9 +1,6 @@
 package com.dlet.cartrack.challenge.testcases
 
-import com.dlet.cartrack.challenge.domain.model.Address
-import com.dlet.cartrack.challenge.domain.model.Company
-import com.dlet.cartrack.challenge.domain.model.GeoLocation
-import com.dlet.cartrack.challenge.domain.model.User
+import com.dlet.cartrack.challenge.domain.model.*
 
 object TestData {
 
@@ -51,9 +48,37 @@ object TestData {
     )
   )
 
+  val countryOne = Country(
+    name = "Philippines",
+    code = "PH"
+  )
+
+  val countryTwo = Country(
+    name = "Afghanistan",
+    code = "AF"
+  )
+
+  val countryThree = Country(
+    name = "Åland Islands",
+    code = "AX"
+  )
+
+  val countryFour = Country(
+    name = "Albania",
+    code = "AL"
+  )
+
+  val countriesJson = "[{\"name\":\"Afghanistan\",\"code\":\"AF\"},{\"name\":\"Åland Islands\",\"code\":\"AX\"},{\"name\":\"Albania\",\"code\":\"AL\"}]"
+
   val listOfUsers = listOf(
     user1,
     user2
+  )
+
+  val listOfCountries = listOf(
+    countryTwo,
+    countryThree,
+    countryFour
   )
 
 }
