@@ -10,7 +10,7 @@ import java.util.*
 @RealmClass
 open class UserDto() : RealmObject() {
   @PrimaryKey
-  var id: String = ""
+  var id: Int = -1
   var name: String = ""
   var username: String = ""
   var email: String = ""

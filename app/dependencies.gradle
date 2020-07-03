@@ -108,7 +108,10 @@ ext {
 
       // HILT DI
       [configuration: "implementation", dependency: "com.google.dagger:hilt-android:$hilt_di"],
-      [configuration: "kapt", dependency: "com.google.dagger:hilt-android-compiler:$hilt_di"]
+      [configuration: "kapt", dependency: "com.google.dagger:hilt-android-compiler:$hilt_di"],
+
+      // Lottie
+      [configuration: "implementation", dependency: "com.airbnb.android:lottie:$lottie_version"]
 
   ]
 }

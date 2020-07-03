@@ -9,12 +9,12 @@ import io.realm.annotations.RealmClass
 open class CompanyDto() : RealmObject() {
   @PrimaryKey
   var id: String = ""
-  var userId: String = ""
+  var userId: Int = -1
   var name: String = ""
   var catchPhrase: String = ""
   var bs: String = ""
 
-  constructor(item: Company, userId: String, generatedId: String) : this() {
+  constructor(item: Company, userId: Int, generatedId: String) : this() {
     this.id = generatedId
     this.userId = userId
     this.name = item.name

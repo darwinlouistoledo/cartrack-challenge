@@ -69,4 +69,6 @@ ext {
 
   data_binding_compiler = '3.1.4'
 
+  lottie_version = '3.4.1'
+
 }

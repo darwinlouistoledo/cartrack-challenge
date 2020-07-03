@@ -9,11 +9,11 @@ import io.realm.annotations.RealmClass
 open class GeoLocationDto() : RealmObject(){
   @PrimaryKey
   var id: String = ""
-  var userId: String = ""
+  var userId: Int = -1
   var latitude: Float ?= 0f
   var longitude: Float ?= 0f
 
-  constructor(item: GeoLocation, userId: String, generatedId: String): this(){
+  constructor(item: GeoLocation, userId: Int, generatedId: String): this(){
     this.id = generatedId
     this.userId = userId
     this.latitude = item.latitude

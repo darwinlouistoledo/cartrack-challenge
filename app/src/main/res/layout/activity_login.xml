@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/screenBackground"
+        android:padding="@dimen/padding_large">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/loginFields"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            android:layout_marginBottom="@dimen/margin_large"
+            app:lottie_rawRes="@raw/login_animation" />
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/loginFields"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilUsername"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/lbl_username"
+                app:boxBackgroundColor="@color/primalGrey">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tietUsername"
+                    style="@style/app_screen_content_header.regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textSize="@dimen/font_size_18sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPassword"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:hint="@string/lbl_password"
+                app:boxBackgroundColor="@color/primalGrey"
+                app:endIconMode="password_toggle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tietPassword"
+                    style="@style/app_screen_content_header.regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textSize="@dimen/font_size_18sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spinkitView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:visibility="gone"
+            app:SpinKit_Color="@color/colorPrimary"
+            app:SpinKit_Style="ThreeBounce"
+            app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/guideline"
+            tools:background="@color/colorPrimary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogin"
+            style="@style/app_screen_content_header.regular"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="@string/lbl_login"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/guideline" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvInvalidMessage"
+            style="@style/app_screen_content.regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:gravity="center"
+            android:text="@string/login_error"
+            android:textColor="@color/red"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/btnLogin"
+            tools:layout_editor_absoluteX="32dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".7" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

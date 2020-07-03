@@ -31,6 +31,6 @@ class UserUseCaseImpl @Inject constructor(
         password = password
       )
     )
-      .map<DataResult<User>> { DataResult.Success(it) }
+      .map<DataResult<User>> { DataResult.Success(it.getValue()) }
       .onErrorReturn { DataResult.Failed(it) }
 }

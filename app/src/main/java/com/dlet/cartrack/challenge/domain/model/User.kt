@@ -1,7 +1,7 @@
 package com.dlet.cartrack.challenge.domain.model
 
 data class User(
-  val id: String,
+  val id: Int,
   val name: String,
   val username: String,
   val email: String,

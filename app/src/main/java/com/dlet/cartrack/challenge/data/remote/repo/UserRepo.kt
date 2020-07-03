@@ -3,7 +3,7 @@ package com.dlet.cartrack.challenge.data.remote.repo
 import com.dlet.cartrack.challenge.domain.model.User
 
 data class UserRepo(
-  val id: String,
+  val id: Int,
   val name: String,
   val username: String,
   val email: String,

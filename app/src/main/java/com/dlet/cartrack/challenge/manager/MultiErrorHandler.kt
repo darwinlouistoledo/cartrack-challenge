@@ -1,15 +1,15 @@
 package com.dlet.cartrack.challenge.manager
 
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.dlet.cartrack.challenge.domain.manager.ErrorHandler
 import timber.log.Timber
 
 @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-class MultiErrorHandler : ErrorHandler<Fragment> {
+class MultiErrorHandler : ErrorHandler<AppCompatActivity> {
 
-  private val handlers = mutableListOf<ErrorHandler<Fragment>>()
+  private val handlers = mutableListOf<ErrorHandler<AppCompatActivity>>()
 
-  fun add(handler: ErrorHandler<Fragment>) {
+  fun add(handler: ErrorHandler<AppCompatActivity>) {
     handlers.add(handler)
   }
 
@@ -20,7 +20,7 @@ class MultiErrorHandler : ErrorHandler<Fragment> {
   override fun canHandle(error: Throwable): Boolean = true
 
   override fun handle(
-    fragment: Fragment,
+    activity: AppCompatActivity,
     error: Throwable
   ) {
     Timber.e(error)
@@ -28,7 +28,7 @@ class MultiErrorHandler : ErrorHandler<Fragment> {
     handlers.forEach {
       if (!isHandled && it.canHandle(error)) {
         isHandled = true
-        it.handle(fragment, error)
+        it.handle(activity, error)
       }
     }
   }

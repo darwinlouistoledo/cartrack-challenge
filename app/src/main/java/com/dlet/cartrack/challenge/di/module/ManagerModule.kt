@@ -1,6 +1,7 @@
 package com.dlet.cartrack.challenge.di.module
 
 import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.dlet.cartrack.challenge.data.local.manager.RepositoryCachePrefsImpl
 import com.dlet.cartrack.challenge.di.qualifiers.DebugTree
@@ -43,7 +44,7 @@ class ManagerModule {
 
   @Singleton
   @Provides
-  fun errorHandler(gson: Gson): ErrorHandler<Fragment> {
+  fun errorHandler(gson: Gson): ErrorHandler<AppCompatActivity> {
     val multiErrorHandler =
       MultiErrorHandler()
     multiErrorHandler.add(
