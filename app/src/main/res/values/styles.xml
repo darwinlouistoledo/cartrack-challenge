@@ -1,0 +1,76 @@
+<resources>
+
+  <!-- Base application theme. -->
+  <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+  </style>
+
+  <!-- Loading Indicators -->
+  <style name="spinkit_basic" parent="SpinKitView.Large.ThreeBounce">
+    <item name="SpinKit_Color">@color/colorPrimary</item>
+  </style>
+
+  <style name="app_toolbar_text" parent="TextAppearance.AppCompat">
+    <item name="android:textSize">@dimen/font_size_16sp</item>
+    <item name="android:textColor">@color/textColorPrimary</item>
+    <item name="fontFamily">@font/roboto_regular</item>
+  </style>
+
+  <style name="app_screen_header_text_large.nopadding" parent="TextAppearance.AppCompat">
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:textSize">@dimen/font_size_22sp</item>
+    <item name="android:textColor">@color/textColorPrimary</item>
+    <item name="fontFamily">@font/roboto_medium</item>
+  </style>
+
+  <style name="app_screen_content_text.regular" parent="TextAppearance.AppCompat">
+    <item name="android:textSize">@dimen/font_size_14sp</item>
+    <item name="android:textColor">@color/textColorPrimary</item>
+    <item name="android:padding">@dimen/padding_medium</item>
+    <item name="fontFamily">@font/roboto_regular</item>
+  </style>
+
+  <style name="app_screen_content_header.regular" parent="TextAppearance.AppCompat">
+    <item name="android:textSize">@dimen/font_size_14sp</item>
+    <item name="android:textColor">@color/textColorPrimary</item>
+    <item name="android:paddingStart">@dimen/padding_medium</item>
+    <item name="android:paddingEnd">@dimen/padding_medium</item>
+    <item name="fontFamily">@font/roboto_medium</item>
+  </style>
+
+  <style name="app_screen_content_header.large.black" parent="TextAppearance.AppCompat">
+    <item name="android:textSize">@dimen/font_size_18sp</item>
+    <item name="android:textColor">@color/textColorPrimary</item>
+    <item name="fontFamily">@font/roboto_medium</item>
+  </style>
+
+  <style name="app_screen_content.regular" parent="TextAppearance.AppCompat">
+    <item name="android:textSize">@dimen/font_size_14sp</item>
+    <item name="android:textColor">@color/textColorPrimary</item>
+    <item name="fontFamily">@font/roboto_medium</item>
+  </style>
+
+  <style name="app_screen_content.small" parent="TextAppearance.AppCompat">
+    <item name="android:textSize">@dimen/font_size_12sp</item>
+    <item name="android:textColor">@color/textColorPrimary</item>
+    <item name="fontFamily">@font/roboto_regular</item>
+  </style>
+
+  <style name="app_screen_content_input.regular" parent="TextAppearance.AppCompat">
+    <item name="android:textSize">@dimen/font_size_14sp</item>
+    <item name="android:textColor">@color/textColorPrimary</item>
+    <item name="android:textColorHint">@color/textColorSecondary</item>
+    <item name="android:layout_marginStart">@dimen/margin_medium</item>
+    <item name="android:layout_marginEnd">@dimen/margin_medium</item>
+    <item name="android:paddingStart">@dimen/padding_medium</item>
+    <item name="android:paddingEnd">@dimen/padding_medium</item>
+    <item name="android:paddingTop">@dimen/padding_small</item>
+    <item name="android:paddingBottom">@dimen/padding_small</item>
+    <item name="android:gravity">center_vertical|start</item>
+    <item name="fontFamily">@font/roboto_regular</item>
+  </style>
+
+</resources>

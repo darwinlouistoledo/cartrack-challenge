@@ -1,0 +1,13 @@
+<resources>
+  <string name="app_name">Cartrack-Challenge</string>
+
+  <string name="generic_error">Something went wrong. Please try again.</string>
+
+  <string name="title_all_users">All Users</string>
+  <string name="title_map_view">Map View</string>
+
+  <string name="lbl_value_address">Address: %s</string>
+  <string name="lbl_value_email">Email: %s</string>
+  <string name="lbl_value_phone">Phone: %s</string>
+  <string name="lbl_value_website">Address: %s</string>
+</resources>

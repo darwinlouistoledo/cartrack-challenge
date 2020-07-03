@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="colorPrimary">#1293B7</color>
+  <color name="colorPrimaryDark">#0B5F89</color>
+  <color name="colorAccent">#A0C5CF</color>
+
+  <color name="screenBackground">#EBEEF3</color>
+  <color name="cardBackground">#F9FAFC</color>
+
+  <color name="textColorPrimary">#1C1C1C</color>
+  <color name="textColorSecondary">#9F9D9D</color>
+
+  <color name="lineDivider">#DEDEDE</color>
+
+  <color name="white">#FFFFFF</color>
+  <color name="primalGrey">#F5F5F5</color>
+  <color name="secondGrey">#9F9D9D</color>
+  <color name="thridGrey">#EAEAEA</color>
+
+  <color name="activeGreen">#07A207</color>
+
+</resources>

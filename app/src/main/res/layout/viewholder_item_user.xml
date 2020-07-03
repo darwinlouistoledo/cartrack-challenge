@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+  <com.google.android.material.card.MaterialCardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/margin_medium"
+      app:cardCornerRadius="4dp"
+      >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@color/cardBackground"
+        android:padding="@dimen/padding_medium"
+        >
+
+      <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/tvName"
+          style="@style/app_screen_content_header.large.black"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          tools:text="Darwin Toledo" />
+
+      <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/tvAddress"
+          style="@style/app_screen_content.regular"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/margin_small"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/tvName"
+          tools:text="@tools:sample/cities" />
+
+      <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/tvEmail"
+          style="@style/app_screen_content.regular"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/margin_small"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/tvAddress"
+          tools:text="test@gmail.com" />
+
+      <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/tvPhone"
+          style="@style/app_screen_content.regular"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/margin_small"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/tvEmail"
+          tools:text="0000000" />
+
+      <androidx.appcompat.widget.AppCompatTextView
+          android:id="@+id/tvWebsite"
+          style="@style/app_screen_content.regular"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/margin_small"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/tvPhone"
+          tools:text="test.com" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </com.google.android.material.card.MaterialCardView>
+
+</layout>

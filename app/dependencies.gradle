@@ -1,0 +1,114 @@
+ext {
+
+  appDependencies = [
+      [configuration: "implementation", dependency: fileTree(dir: 'libs', include: ['*.jar'])],
+      [configuration: "implementation", dependency: "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"],
+
+      // androidx
+      [configuration: "implementation", dependency: "androidx.core:core:$androidx_version_core"],
+      [configuration: "implementation", dependency: "androidx.core:core-ktx:$androidx_version_core"],
+      [configuration: "implementation", dependency: "androidx.appcompat:appcompat:$androidx_version_appcompat"],
+      [configuration: "implementation", dependency: "androidx.recyclerview:recyclerview:$androidx_version"],
+      [configuration: "implementation", dependency: "androidx.cardview:cardview:$androidx_version"],
+      [configuration: "implementation", dependency: "androidx.browser:browser:$androidx_version"],
+      [configuration: "implementation", dependency: "com.google.android.material:material:$material_version"],
+      [configuration: "implementation", dependency: "androidx.legacy:legacy-support-v4:$androidx_version"],
+      [configuration: "implementation", dependency: "androidx.palette:palette:$androidx_version"],
+      [configuration: "implementation", dependency: "androidx.constraintlayout:constraintlayout:$constraint_layout_version"],
+      [configuration: "implementation", dependency: "androidx.swiperefreshlayout:swiperefreshlayout:$androidx_version"],
+
+      // android test
+      [configuration: "testImplementation", dependency: "junit:junit:$junit_version"],
+      [configuration: "androidTestImplementation", dependency: "androidx.test:runner:$test_runner"],
+      [configuration: "testImplementation", dependency: "androidx.test:runner:$test_runner"],
+      [configuration: "androidTestImplementation", dependency: "androidx.test:rules:$test_rule"],
+      [configuration: "testImplementation", dependency: "androidx.test:rules:$test_rule"],
+      [configuration: "androidTestImplementation", dependency: "androidx.test.ext:truth:$test_rule"],
+      [configuration: "testImplementation", dependency: "androidx.test.ext:truth:$test_rule"],
+      [configuration: "androidTestImplementation", dependency: "androidx.test.ext:junit:$test_rule"],
+      [configuration: "testImplementation", dependency: "androidx.test.ext:junit:$test_rule"],
+      [configuration: "androidTestImplementation", dependency: "androidx.test.espresso:espresso-core:$espresso_version"],
+      [configuration: "testImplementation", dependency: "androidx.test.espresso:espresso-core:$espresso_version"],
+      [configuration: "implementation", dependency: "androidx.test.espresso:espresso-idling-resource:$espresso_version"],
+
+      // mockito
+      [configuration: "androidTestImplementation", dependency: "org.mockito:mockito-core:$mockito_core"],
+      [configuration: "testImplementation", dependency: "org.mockito:mockito-core:$mockito_core"],
+      [configuration: "androidTestImplementation", dependency: "org.mockito:mockito-android:$mockito_android"],
+      [configuration: "androidTestImplementation", dependency: "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin"],
+      [configuration: "testImplementation", dependency: "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin"],
+
+      [configuration: "testImplementation", dependency: "org.amshove.kluent:kluent:$kluent"],
+
+      // Google Play Service
+      [configuration: "implementation", dependency: "com.google.android.gms:play-services-maps:$play_services_version"],
+
+      // Android Architecture Components
+
+      // Navigation
+      [configuration: "implementation", dependency: "androidx.navigation:navigation-fragment-ktx:$navigation_version"],
+      [configuration: "implementation", dependency: "androidx.navigation:navigation-ui-ktx:$navigation_version"],
+
+
+      // ViewModel and LiveData
+      [configuration: "implementation", dependency: "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"],
+      [configuration: "implementation", dependency: "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"],
+      [configuration: "implementation", dependency: "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"],
+      [configuration: "implementation", dependency: "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version"],
+      [configuration: "kapt", dependency: "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"],
+      [configuration: "testImplementation", dependency: "androidx.arch.core:core-testing:$lifecycle_version"],
+
+      // Retrofit2
+      [configuration: "implementation", dependency: "com.squareup.retrofit2:retrofit:$retrofit2_version"],
+      [configuration: "implementation", dependency: "com.squareup.retrofit2:converter-gson:$retrofit2_version"],
+      [configuration: "implementation", dependency: "com.squareup.retrofit2:adapter-rxjava2:$retrofit2_version"],
+
+      // okhttp3
+      [configuration: "implementation", dependency: "com.squareup.okhttp3:logging-interceptor:$okhttp3_version"],
+      [configuration: "implementation", dependency: "com.squareup.okhttp3:okhttp:$okhttp3_version"],
+      [configuration: "androidTestImplementation", dependency: "com.squareup.okhttp3:mockwebserver:$okhttp3_version"],
+
+      // Rx2Java
+      [configuration: "implementation", dependency: "io.reactivex.rxjava2:rxandroid:$rxandroid_version"],
+      [configuration: "implementation", dependency: "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"],
+      [configuration: "implementation", dependency: "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxbinding_kotlin"],
+      [configuration: "implementation", dependency: "com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:$rxbinding_kotlin"],
+
+      // Glide
+      [configuration: "implementation", dependency: "com.github.bumptech.glide:glide:$glide_version", options: {
+        transitive = true
+      }],
+      [configuration: "implementation", dependency: "com.github.bumptech.glide:annotations:$glide_version"],
+      [configuration: "implementation", dependency: "com.github.bumptech.glide:okhttp3-integration:$glide_version"],
+      [configuration: "kapt", dependency: "com.github.bumptech.glide:glide:$glide_version"],
+      [configuration: "kapt", dependency: "com.github.bumptech.glide:compiler:$glide_version"],
+
+      // Timber Logging
+      [configuration: "implementation", dependency: "com.jakewharton.timber:timber:$timber_version"],
+
+      // Material Dialog
+      [configuration: "implementation", dependency: "com.afollestad.material-dialogs:core:$material_dialog"],
+
+      // https://github.com/ybq/Android-SpinKit
+      [configuration: "implementation", dependency: "com.github.ybq:Android-SpinKit:$spinKit"],
+
+
+      // circleindicator
+      [configuration: "implementation", dependency: "me.relex:circleindicator:$circle_indicator"],
+
+      // databinding
+      [configuration: "kapt", dependency: "com.android.databinding:compiler:$data_binding_compiler"],
+
+      //REALM DB
+      [configuration: "api", dependency: "io.realm:realm-annotations:$realm_version"],
+      [configuration: "api", dependency: "io.realm:realm-android-library:$realm_version"],
+      [configuration: "api", dependency: "io.realm:realm-android-kotlin-extensions:$realm_version"],
+      [configuration: "kapt", dependency: "io.realm:realm-annotations-processor:$realm_version"],
+
+
+      // HILT DI
+      [configuration: "implementation", dependency: "com.google.dagger:hilt-android:$hilt_di"],
+      [configuration: "kapt", dependency: "com.google.dagger:hilt-android-compiler:$hilt_di"]
+
+  ]
+}

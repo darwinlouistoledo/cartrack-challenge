@@ -1,0 +1,74 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+apply from: 'dependencies.gradle'
+apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'realm-android'
+
+android {
+  compileSdkVersion rootProject.ext.compileSdkVersion
+  buildToolsVersion rootProject.ext.buildToolsVersion
+
+  defaultConfig {
+    applicationId "com.dlet.cartrack.challenge"
+    minSdkVersion rootProject.ext.minSdkVersion
+    targetSdkVersion rootProject.ext.targetSdkVersion
+    versionCode rootProject.ext.version_code
+    versionName rootProject.ext.version_name
+
+    multiDexEnabled true
+
+    vectorDrawables.useSupportLibrary = true
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+  }
+
+  buildFeatures {
+    dataBinding = true
+    viewBinding = true
+  }
+
+  buildTypes {
+    debug {
+      buildConfigField "String", "WEB_SERVICES_DOMAIN", "\"https://jsonplaceholder.typicode.com/\""
+
+      manifestPlaceholders = [
+              "googleMapApiKey": "AIzaSyD4_W53tWdSX4omL3pDw6Pt1ZWyH4o9Xto"
+      ]
+
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+
+    release {
+      buildConfigField "String", "WEB_SERVICES_DOMAIN", "\"https://jsonplaceholder.typicode.com/\""
+
+      manifestPlaceholders = [
+              "googleMapApiKey": "AIzaSyD4_W53tWdSX4omL3pDw6Pt1ZWyH4o9Xto"
+      ]
+
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+  }
+  dexOptions {
+    javaMaxHeapSize "4g"
+    preDexLibraries true
+    dexInProcess = true
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+  kotlinOptions {
+    jvmTarget = "1.8"
+  }
+}
+
+dependencies {
+  appDependencies.each {
+    add(it.configuration, it.dependency, it.options)
+  }
+}
