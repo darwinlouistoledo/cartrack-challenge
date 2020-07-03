@@ -6,6 +6,4 @@ import io.reactivex.Observable
 
 interface UserUseCase {
   fun getUsers(): Observable<DataResult<List<User>>>
-
-  fun loginUser(username: String, password: String): Observable<DataResult<User>>
 }

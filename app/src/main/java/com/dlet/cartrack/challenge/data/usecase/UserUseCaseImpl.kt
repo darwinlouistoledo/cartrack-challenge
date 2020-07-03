@@ -1,8 +1,6 @@
 package com.dlet.cartrack.challenge.data.usecase
 
-import com.dlet.cartrack.challenge.data.local.source.UserLocalSource
 import com.dlet.cartrack.challenge.domain.base.Repository
-import com.dlet.cartrack.challenge.domain.keys.UserKey
 import com.dlet.cartrack.challenge.domain.model.User
 import com.dlet.cartrack.challenge.domain.sealedclass.DataResult
 import com.dlet.cartrack.challenge.domain.usecase.UserUseCase
@@ -11,8 +9,7 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class UserUseCaseImpl @Inject constructor(
-  private val userListRepository: Repository<String, List<User>>,
-  private val userLocalRepository: UserLocalSource
+  private val userListRepository: Repository<String, List<User>>
 ) : UserUseCase {
 
   override fun getUsers(): Observable<DataResult<List<User>>> =
@@ -23,14 +20,4 @@ class UserUseCaseImpl @Inject constructor(
       }
       .onErrorReturn { DataResult.Failed(it) }
 
-
-  override fun loginUser(username: String, password: String): Observable<DataResult<User>> =
-    userLocalRepository.get(
-      UserKey(
-        username = username,
-        password = password
-      )
-    )
-      .map<DataResult<User>> { DataResult.Success(it.getValue()) }
-      .onErrorReturn { DataResult.Failed(it) }
 }
