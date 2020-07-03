@@ -10,15 +10,16 @@
         android:padding="@dimen/padding_large">
 
         <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimationView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/margin_large"
             app:layout_constraintBottom_toTopOf="@+id/loginFields"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            android:layout_marginBottom="@dimen/margin_large"
             app:lottie_rawRes="@raw/login_animation" />
 
 
@@ -72,6 +73,38 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/containerCountry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:background="@drawable/shape_login_input_background"
+            android:padding="@dimen/padding_small"
+            app:layout_constraintTop_toBottomOf="@+id/guideline"
+            android:visibility="visible"
+            tools:layout_editor_absoluteX="32dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivCountryIcon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@mipmap/ic_launcher" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvName"
+                style="@style/app_screen_content_header.large.black"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium"
+                app:layout_constraintBottom_toBottomOf="@+id/ivCountryIcon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/ivCountryIcon"
+                app:layout_constraintTop_toTopOf="@+id/ivCountryIcon"
+                tools:text="Darwin Toledo" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <com.github.ybq.android.spinkit.SpinKitView
             android:id="@+id/spinkitView"
@@ -81,10 +114,9 @@
             android:visibility="gone"
             app:SpinKit_Color="@color/colorPrimary"
             app:SpinKit_Style="ThreeBounce"
-            app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/containerCountry"
             tools:background="@color/colorPrimary" />
 
         <com.google.android.material.button.MaterialButton
@@ -95,7 +127,7 @@
             android:layout_marginTop="@dimen/margin_large"
             android:text="@string/lbl_login"
             android:textColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@+id/guideline" />
+            app:layout_constraintTop_toBottomOf="@+id/containerCountry" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvInvalidMessage"
@@ -115,7 +147,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent=".7" />
+            app:layout_constraintGuide_percent=".6" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

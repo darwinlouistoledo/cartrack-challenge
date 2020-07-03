@@ -2,6 +2,7 @@ package com.dlet.cartrack.challenge.di.module
 
 import androidx.lifecycle.ViewModel
 import com.dlet.cartrack.challenge.di.mapkey.ViewModelKey
+import com.dlet.cartrack.challenge.module.countries.CountryListViewModel
 import com.dlet.cartrack.challenge.module.login.LogInViewModel
 import com.dlet.cartrack.challenge.module.map.MapUsersViewModel
 import com.dlet.cartrack.challenge.module.users.UserListViewModel
@@ -31,5 +32,10 @@ abstract class ViewModelModule {
   @IntoMap
   @ViewModelKey(MapUsersViewModel::class)
   abstract fun mapUsersViewModel(mapUsersViewModel: MapUsersViewModel): ViewModel
+
+  @Binds
+  @IntoMap
+  @ViewModelKey(CountryListViewModel::class)
+  abstract fun countryListViewModel(countryListViewModel: CountryListViewModel): ViewModel
 
 }

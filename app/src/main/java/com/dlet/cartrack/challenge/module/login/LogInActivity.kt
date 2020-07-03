@@ -16,6 +16,7 @@ import com.dlet.cartrack.challenge.di.factory.ViewModelFactory
 import com.dlet.cartrack.challenge.domain.exceptions.InvalidUsernameAndPasswordException
 import com.dlet.cartrack.challenge.domain.exceptions.RequiredFieldException
 import com.dlet.cartrack.challenge.domain.manager.ErrorHandler
+import com.dlet.cartrack.challenge.module.countries.CountryListActivity
 import com.dlet.cartrack.challenge.module.users.UserListActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -51,6 +52,10 @@ class LogInActivity : AppCompatActivity(){
             password = tietPassword.text.toString()
           )
         )
+      }
+
+      containerCountry.setOnClickListener {
+        startActivity(Intent(applicationContext, CountryListActivity::class.java))
       }
     }
   }

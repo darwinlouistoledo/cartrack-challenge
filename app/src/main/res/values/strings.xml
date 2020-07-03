@@ -7,6 +7,7 @@
 
   <string name="title_all_users">All Users</string>
   <string name="title_map_view">Map View</string>
+  <string name="title_select_country">Select Country</string>
 
   <string name="lbl_value_address">Address: %s</string>
   <string name="lbl_value_email">Email: %s</string>

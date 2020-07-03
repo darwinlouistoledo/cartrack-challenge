@@ -9,6 +9,7 @@ import com.dlet.cartrack.challenge.data.remote.service.UserApiService
 import com.dlet.cartrack.challenge.data.remote.source.UserListRemoteSource
 import com.dlet.cartrack.challenge.data.repository.SimpleRepository
 import com.dlet.cartrack.challenge.data.usecase.AppInitializationUseCaseImpl
+import com.dlet.cartrack.challenge.data.usecase.CountriesUseCaseImpl
 import com.dlet.cartrack.challenge.data.usecase.LogInUseCaseImpl
 import com.dlet.cartrack.challenge.data.usecase.UserUseCaseImpl
 import com.dlet.cartrack.challenge.domain.base.LocalSource
@@ -19,6 +20,7 @@ import com.dlet.cartrack.challenge.domain.model.User
 import com.dlet.cartrack.challenge.domain.rx.SchedulerProvider
 import com.dlet.cartrack.challenge.domain.sealedclass.Optional
 import com.dlet.cartrack.challenge.domain.usecase.AppInitializationUseCase
+import com.dlet.cartrack.challenge.domain.usecase.CountriesUseCase
 import com.dlet.cartrack.challenge.domain.usecase.LogInUseCase
 import com.dlet.cartrack.challenge.domain.usecase.UserUseCase
 import dagger.Module
@@ -80,4 +82,8 @@ class DataModule {
   @Provides
   fun logInUseCase(logInUseCaseImpl: LogInUseCaseImpl): LogInUseCase =
     logInUseCaseImpl
+
+  @Provides
+  fun countriesUseCase(countriesUseCaseImpl: CountriesUseCaseImpl): CountriesUseCase =
+    countriesUseCaseImpl
 }
