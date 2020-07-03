@@ -1,8 +1,11 @@
 package com.dlet.cartrack.challenge.module.login
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.dlet.cartrack.challenge.R
 import com.dlet.cartrack.challenge.common_android.ext.aac.observe
 import com.dlet.cartrack.challenge.common_android.ext.aac.withViewModel
@@ -13,16 +16,21 @@ import com.dlet.cartrack.challenge.common_android.ext.view.makeVisible
 import com.dlet.cartrack.challenge.common_android.ext.view.makeVisibleOrGone
 import com.dlet.cartrack.challenge.databinding.ActivityLoginBinding
 import com.dlet.cartrack.challenge.di.factory.ViewModelFactory
+import com.dlet.cartrack.challenge.domain.constants.AppConstant
 import com.dlet.cartrack.challenge.domain.exceptions.InvalidUsernameAndPasswordException
 import com.dlet.cartrack.challenge.domain.exceptions.RequiredFieldException
 import com.dlet.cartrack.challenge.domain.manager.ErrorHandler
+import com.dlet.cartrack.challenge.domain.model.Country
 import com.dlet.cartrack.challenge.module.countries.CountryListActivity
 import com.dlet.cartrack.challenge.module.users.UserListActivity
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LogInActivity : AppCompatActivity(){
+class LogInActivity : AppCompatActivity() {
 
   @Inject
   lateinit var viewModelFactory: ViewModelFactory
@@ -34,12 +42,14 @@ class LogInActivity : AppCompatActivity(){
 
   private lateinit var viewModel: LogInViewModel
 
+  private lateinit var br: BufferedReader
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
     binding = withBinding(R.layout.activity_login)
 
-    viewModel = withViewModel(this, viewModelFactory){
+    viewModel = withViewModel(this, viewModelFactory) {
       observe(observableState, ::render)
     }
 
@@ -55,12 +65,38 @@ class LogInActivity : AppCompatActivity(){
       }
 
       containerCountry.setOnClickListener {
-        startActivity(Intent(applicationContext, CountryListActivity::class.java))
+        startActivityForResult(
+          Intent(applicationContext, CountryListActivity::class.java),
+          CountryListActivity.REQUEST_CODE
+        )
       }
     }
+
+    br = BufferedReader(InputStreamReader(resources.openRawResource(R.raw.countries)))
+
+    viewModel.dispatch(
+      LogInViewModel.Action.LoadCountry(
+        rawJson = br.readLine(),
+        localeCountry = resources.configuration.locale.country
+      )
+    )
   }
 
-  private fun render(state: LogInViewModel.State){
+  private fun render(state: LogInViewModel.State) {
+
+    state.country?.let {
+      br.close()
+      val icon = it.code.let {
+        AppConstant.COUNTRY_ICON.replace(AppConstant.COUNTRY_CODE, it.toLowerCase(Locale.ENGLISH))
+      }
+
+      binding.tvCountryName.text = it.name
+
+      Glide.with(applicationContext)
+        .asBitmap()
+        .load(icon)
+        .into(binding.ivCountryIcon)
+    }
 
     state.successLogin?.getContentIfNotHandled()?.let {
       showToast(R.string.login_success)
@@ -68,7 +104,7 @@ class LogInActivity : AppCompatActivity(){
       finish()
     }
 
-    state.showLoading?.getContentIfNotHandled()?.let {isLoading->
+    state.showLoading?.getContentIfNotHandled()?.let { isLoading ->
       binding.apply {
         btnLogin.makeVisibleOrGone(!isLoading)
         spinkitView.makeVisibleOrGone(isLoading)
@@ -85,15 +121,29 @@ class LogInActivity : AppCompatActivity(){
         tietPassword.isEnabled = true
 
         tvInvalidMessage.makeVisible()
-        when(e){
-          is InvalidUsernameAndPasswordException -> tvInvalidMessage.text = getString(R.string.login_error)
+        when (e) {
+          is InvalidUsernameAndPasswordException -> tvInvalidMessage.text =
+            getString(R.string.login_error)
           is RequiredFieldException -> tvInvalidMessage.text = e.message
         }
       }
     }
 
     state.error?.getContentIfNotHandled()?.let {
+      br.close()
       errorHandler.handle(this, it)
+    }
+  }
+
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+
+    if (resultCode == Activity.RESULT_OK && requestCode == CountryListActivity.REQUEST_CODE){
+      data?.let {
+        val country = it.getParcelableExtra<Country>(CountryListActivity.EXTRA_RESULT)
+
+        viewModel.dispatch(LogInViewModel.Action.SetCountry(country))
+      }
     }
   }
 }

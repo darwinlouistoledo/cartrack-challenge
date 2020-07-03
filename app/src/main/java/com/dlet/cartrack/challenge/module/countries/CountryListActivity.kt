@@ -1,5 +1,7 @@
 package com.dlet.cartrack.challenge.module.countries
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,15 +12,20 @@ import com.dlet.cartrack.challenge.common_android.ext.component.withBinding
 import com.dlet.cartrack.challenge.databinding.ActivityCountryListBinding
 import com.dlet.cartrack.challenge.di.factory.ViewModelFactory
 import com.dlet.cartrack.challenge.domain.manager.ErrorHandler
+import com.dlet.cartrack.challenge.domain.model.Country
 import com.dlet.cartrack.challenge.module.adapter.CountryListItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_users_map.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class CountryListActivity : AppCompatActivity(){
+
+  companion object{
+    const val EXTRA_RESULT="extra-result-data"
+    const val REQUEST_CODE = 100
+  }
 
   @Inject
   lateinit var viewModelFactory: ViewModelFactory
@@ -32,7 +39,7 @@ class CountryListActivity : AppCompatActivity(){
 
   private lateinit var br: BufferedReader
 
-  private val adapterItems = CountryListItemAdapter()
+  private val adapterItems = CountryListItemAdapter(::onCountrySelected)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -72,6 +79,15 @@ class CountryListActivity : AppCompatActivity(){
       it.printStackTrace()
       errorHandler.handle(this, it)
     }
+  }
+
+  private fun onCountrySelected(country: Country){
+    val result = Intent().apply {
+      putExtra(EXTRA_RESULT, country)
+    }
+
+    setResult(Activity.RESULT_OK, result)
+    finish()
   }
 
 }

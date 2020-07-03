@@ -93,7 +93,7 @@
                 tools:src="@mipmap/ic_launcher" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvName"
+                android:id="@+id/tvCountryName"
                 style="@style/app_screen_content_header.large.black"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

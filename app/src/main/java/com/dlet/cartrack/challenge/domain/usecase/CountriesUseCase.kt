@@ -6,4 +6,7 @@ import io.reactivex.Single
 
 interface CountriesUseCase {
   fun getAllCountry(rawJson: String): Single<DataResult<List<Country>>>
+
+  fun getCountryOfLocale(rawJson: String, localeCountry: String): Single<DataResult<Country>>
+
 }

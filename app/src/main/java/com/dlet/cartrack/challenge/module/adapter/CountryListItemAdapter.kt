@@ -9,7 +9,9 @@ import com.dlet.cartrack.challenge.domain.constants.AppConstant
 import com.dlet.cartrack.challenge.domain.model.Country
 import java.util.*
 
-class CountryListItemAdapter : SimpleListAdapter<ViewholderItemCountryBinding, Country>(
+class CountryListItemAdapter(
+  private val onItemSelected: (Country)->Unit
+): SimpleListAdapter<ViewholderItemCountryBinding, Country>(
   R.layout.viewholder_item_country,
   CountryAdapterDiffCallback
 ) {
@@ -20,6 +22,10 @@ class CountryListItemAdapter : SimpleListAdapter<ViewholderItemCountryBinding, C
     position: Int
   ) {
     val context = holder.itemView.context
+
+    holder.itemView.setOnClickListener {
+      onItemSelected.invoke(item)
+    }
 
     holder.binding.apply {
       tvName.text = item.name

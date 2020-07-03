@@ -2,31 +2,35 @@ package com.dlet.cartrack.challenge.module.login
 
 import com.dlet.cartrack.challenge.common_android.mvi.*
 import com.dlet.cartrack.challenge.domain.common.SingleEvent
-import com.dlet.cartrack.challenge.domain.model.Address
-import com.dlet.cartrack.challenge.domain.model.Company
-import com.dlet.cartrack.challenge.domain.model.GeoLocation
-import com.dlet.cartrack.challenge.domain.model.User
+import com.dlet.cartrack.challenge.domain.model.*
 import com.dlet.cartrack.challenge.domain.rx.SchedulerProvider
 import com.dlet.cartrack.challenge.domain.sealedclass.DataResult
+import com.dlet.cartrack.challenge.domain.usecase.CountriesUseCase
 import com.dlet.cartrack.challenge.domain.usecase.LogInUseCase
 import io.reactivex.Observable
 import io.reactivex.rxkotlin.ofType
+import okhttp3.internal.applyConnectionSpec
 import timber.log.Timber
-import java.util.*
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class LogInViewModel @Inject constructor(
   private val logInUseCase: LogInUseCase,
+  countriesUseCase: CountriesUseCase,
   private val schedulerProvider: SchedulerProvider
 ) : MviViewModel<LogInViewModel.Action, LogInViewModel.State>() {
 
   sealed class Action : MviAction {
     data class Login(val username: String, val password: String) : Action()
+
+    data class LoadCountry(val rawJson: String, val localeCountry: String) :Action()
+
+    data class SetCountry(val country: Country): Action()
   }
 
   sealed class Change : MviChange {
     object SuccessLogin : Change()
+
+    data class SetCountry(val country: Country) : Change()
 
     data class Loading(val boolean: Boolean) : Change()
 
@@ -36,6 +40,7 @@ class LogInViewModel @Inject constructor(
   }
 
   data class State(
+    val country: Country ?= null,
     val successLogin: SingleEvent<Boolean>? = null,
     val showLoading: SingleEvent<Boolean>? = null,
     val invalidLogin: SingleEvent<Throwable>? = null,
@@ -48,6 +53,7 @@ class LogInViewModel @Inject constructor(
   private val reducer: Reducer<State, Change> = { state, change ->
     when(change){
       Change.SuccessLogin -> state.copy(successLogin = SingleEvent(true), showLoading = SingleEvent(false))
+      is Change.SetCountry -> state.copy(country = change.country)
       is Change.InvalidLogin -> state.copy(invalidLogin = SingleEvent(change.error))
       is Change.Loading -> state.copy(showLoading = SingleEvent(change.boolean))
       is Change.Error -> state.copy(error = SingleEvent(change.error))
@@ -55,6 +61,22 @@ class LogInViewModel @Inject constructor(
   }
 
   init {
+    val setCountryAction = actions.ofType<Action.LoadCountry>()
+      .switchMap {
+        countriesUseCase.getCountryOfLocale(it.rawJson, it.localeCountry)
+          .toObservable()
+          .map {result->
+            when(result){
+              is DataResult.Success -> Change.SetCountry(result.value)
+              is DataResult.Failed -> Change.InvalidLogin(result.error)
+            }
+          }
+          .startWith(listOf(Change.Loading(true)))
+          .onErrorReturn { Change.Error(it) }
+          .subscribeOn(schedulerProvider.io())
+          .observeOn(schedulerProvider.ui())
+      }
+
     val loginAction = actions.ofType<Action.Login>()
       .switchMap {
         logInUseCase.doLogIn(it.username, it.password)
@@ -70,6 +92,9 @@ class LogInViewModel @Inject constructor(
           .subscribeOn(schedulerProvider.io())
           .observeOn(schedulerProvider.ui())
       }
+
+    val setSelectedCountryAction = actions.ofType<Action.SetCountry>()
+      .map { Change.SetCountry(it.country) }
 
     val createTestUserOneObs = logInUseCase.createTestUserAccount(
       User(
@@ -148,7 +173,9 @@ class LogInViewModel @Inject constructor(
       .observeOn(schedulerProvider.ui())
 
     val states = Observable.mergeArray(
+      setCountryAction,
       loginAction,
+      setSelectedCountryAction,
       createTestUserOneObs,
       createTestUserTwoObs
     )

@@ -9,13 +9,30 @@ import javax.inject.Inject
 
 class CountriesUseCaseImpl @Inject constructor(
   private val gson: Gson
-): CountriesUseCase {
+) : CountriesUseCase {
   override fun getAllCountry(rawJson: String): Single<DataResult<List<Country>>> =
     Single.just(rawJson)
       .map {
         gson.fromJson(rawJson, Array<Country>::class.java).toList()
       }
       .map<DataResult<List<Country>>> {
-        DataResult.Success(it) }
+        DataResult.Success(it)
+      }
+      .onErrorReturn { DataResult.Failed(it) }
+
+  override fun getCountryOfLocale(
+    rawJson: String,
+    localeCountry: String
+  ): Single<DataResult<Country>> =
+    Single.just(rawJson)
+      .map {
+        gson.fromJson(rawJson, Array<Country>::class.java).toList()
+      }
+      .map {
+        it.first { it.code == localeCountry }
+      }
+      .map<DataResult<Country>> {
+        DataResult.Success(it)
+      }
       .onErrorReturn { DataResult.Failed(it) }
 }
